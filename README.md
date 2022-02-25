@@ -14,7 +14,3 @@ Still, education is such an amazing area, and creating online tools so people ca
     If thats not enough, next has a beutiful integration with external APIs, such as databases, billing and content systems. Thus, to develop with next its nothing but great.
   </li>
 </ul>
-
-
-If thats not enough, next has a beutiful integration with external APIs, such as databases, billing and content systems. Thus, to develop with next its nothing but great.
-
