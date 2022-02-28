@@ -10,7 +10,6 @@ interface LinkProps{
 
 export function CustomLink({ name, url }: LinkProps){
   const { asPath } = useRouter()
-  
 
   if(asPath.includes(url)){
     return(
@@ -18,11 +17,15 @@ export function CustomLink({ name, url }: LinkProps){
         <Box display="flex" flexDir="column" justifyContent="space-between">
           <Link
             color="brand.secondary"
-            w="24"
-            textAlign="center"
+            w={["100%","24"]}
+            textAlign={["start","center"]}
             fontWeight="500"
-            fontSize="lg"
+            fontSize={["2xl","lg"]}
             textDecoration="none"
+            mt={["2","0"]}
+            background={["#7459AF","none"]}
+            p={["2","0"]}
+            borderRadius={["10","0"]}
             _hover={{
               textDecoration: 'none'
             }}
@@ -35,34 +38,33 @@ export function CustomLink({ name, url }: LinkProps){
             borderTopRadius="3"
             borderTopRightRadius="3"
             background="brand.secondary"
+            visibility={["hidden", "visible"]}
           />
         </Box>
         
       </NextLink>
     )  
   }
-  else{
-    return(
-      <NextLink href={url} passHref>
-        <Box display="flex" flexDir="column" justifyContent="space-between">
-          <Link
-            color="brand.white"
-            w="24"
-            textAlign="center"
-            fontWeight="500"
-            fontSize="lg"
-            textDecoration="none"
-            _hover={{
-              textDecoration: 'none',
-              color: 'brand.secondary'
-            }}
-          >
-            {name}
-          </Link>
-        </Box>
-      </NextLink>
-    )  
-  }
-
-  
+  return(
+    <NextLink href={url} passHref>
+      <Box display="flex" flexDir="column" justifyContent="space-between">
+        <Link
+          color="brand.white"
+          w={["100%","24"]}
+          textAlign={["start","center"]}
+          fontWeight="500"
+          fontSize={["2xl","lg"]}
+          textDecoration="none"
+          mt={["2","0"]}
+          p={["2","0"]}
+          _hover={{
+            textDecoration: 'none',
+            color: 'brand.secondary'
+          }}
+        >
+          {name}
+        </Link>
+      </Box>
+    </NextLink>
+  )  
 }
