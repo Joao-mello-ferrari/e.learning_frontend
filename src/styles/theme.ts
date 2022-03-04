@@ -7,7 +7,10 @@ export const customTheme = extendTheme({
       'secondary': '#FF6680',
       'background': '#F0EDF5',
       'white': '#FFFFFF',
-      'gray': '#6C6C80'
+      'gray': '#6C6C80',
+      'plight': '#D2C3F1',
+      'dgray': '#3D3D4C',
+      'lgray': '#DEDEF3'
     }
   },
   fonts: {
