@@ -32,7 +32,7 @@ export function Header(){
   }
 
   return(
-    <Flex w="100vw" maxW="1440" h="20vh" background="brand.primary" align="center" px="8" >
+    <Flex w="100vw" maxW="1440" h="20vh" background="brand.primary" align="center" px="8" pb="4">
         
         <Text color="brand.white" fontWeight="bold" fontSize="2xl">
           e<Text as="span" color="brand.secondary" mx="0.8">.</Text>learning
