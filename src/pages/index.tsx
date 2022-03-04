@@ -10,7 +10,7 @@ export default function Home() {
         background="brand.background"
         height="80vh"
         borderTopRadius="20"
-        mt="-3vh"
+        mt={"-3vh"}
         p="10"
       >
         <Select 
@@ -32,8 +32,8 @@ export default function Home() {
         <SimpleGrid
           minChildWidth="300"
         >
-          <GridItem bg="brand.lgray" h="200" w="200px" borderRadius="10">
-          <Image src="./assets/Math.svg" alt="praia" h={[10,20]}/>
+          <GridItem bg="brand.lgray" h="200" w="200px" borderRadius="10" p="4">
+            <Image src="/assets/Math.svg" alt="praia" h={[10,20]}/>
           </GridItem>
         </SimpleGrid>
 
