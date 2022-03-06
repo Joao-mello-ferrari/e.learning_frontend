@@ -12,7 +12,7 @@ export function Header(){
   
   if(isMobile){
     return (
-      <Flex w="100vw" maxW="1440" h="12vh" background="brand.primary" align="center" px="8" pb="4" justify="space-between">
+      <Flex w="100vw" maxW="1440" h="14vh" background="brand.primary" align="center" px="8" pb="4" justify="space-between">
         <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay />
           <DrawerContent>
