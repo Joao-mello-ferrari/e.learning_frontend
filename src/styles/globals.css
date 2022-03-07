@@ -39,6 +39,14 @@ body::-webkit-scrollbar-thumb {
   transform: scale(1.1);
 }
 
+.class-video{
+  border-radius: 1rem;
+  border: 4px solid #6548A3;
+}
+
+.class-description p + p{
+  margin-top: 0.6rem;
+}
 
 
 
