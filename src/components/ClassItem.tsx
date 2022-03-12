@@ -23,13 +23,13 @@ export function ClassItem({ id, title, number, duration, slug, isCurrent }: Clas
       className="custom-grid"
       display="flex" 
       alignItems="center"
-      h="160px" 
-      w={["100%","440px"]} 
+      justifyContent="end"
+      h="140px" 
+      w={["100%","400px"]} 
       onClick={()=>{push(slug)}}
-      // pr={["2","0"]}
     >
       <Flex 
-        w={["20%","120px"]} 
+        w={["20%","100px"]} 
         h="60%"
         justify="center"
         align="center"
@@ -51,7 +51,7 @@ export function ClassItem({ id, title, number, duration, slug, isCurrent }: Clas
         bg={isCurrent ? "brand.plight" : "brand.lgray"}  
         p="8" 
         pl={["10","14"]}
-        w={["70%","320px"]}
+        w={["80%","300px"]}
         h="100%"
         borderRadius="10" 
         position="relative"

@@ -9,6 +9,7 @@ export const customTheme = extendTheme({
       'white': '#FFFFFF',
       'gray': '#6C6C80',
       'plight': '#D2C3F1',
+      'slight': '#FFB3C0',
       'dgray': '#3D3D4C',
       'lgray': '#E4E4E4'
     }

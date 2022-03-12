@@ -1,9 +1,15 @@
 import { GetStaticPaths, GetStaticProps } from "next"
 import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 
 import { Header } from "../../../components/Header";
 import { ClassItem } from '../../../components/ClassItem'
 import { ClassDescription } from "../../../components/ClassDescription";
+import { NavigationButton } from "../../../components/NavigationButton";
+import { TopNavigationBar } from "../../../components/TopNavigationBar";
+
+import { UrlObject } from 'url'
+
 
 interface Class{
   id: number;
@@ -26,67 +32,95 @@ interface CourseProps{
   params: object;
 }    
 
-export default function Course({ course, classes, currentClass, params }: CourseProps){
-  console.log(currentClass)
+export default function Course({ course, classes, currentClass }: CourseProps){
+  const { asPath } = useRouter();
+
+  const previousClassUrl = asPath.replace(String(currentClass.id),String(currentClass?.previousClassId));
+  const nextClassUrl = asPath.replace(String(currentClass.id),String(currentClass?.nextClassId));
   
   return (
-    <Box maxW="1440" m="0 auto" overflowX="hidden">
+    <Box maxW="1440" w="100vw" m="0 auto">
       <Header/>
-      <Flex
-        background="brand.background"
-        flexDir={["column","row"]}
+
+      <Flex 
+        flexDir="column" 
+        background="brand.background"  
         borderTopRadius="20"
         mt={"-3vh"}
-        p={["6","10"]}
-      >
-        <Flex
-          flexDir="column"
-          w="60%"
-          justify="start"
-          pt="2"
-        >
-          <iframe 
-            className="class-video"
-            width="640" 
-            height="360"
-            src="https://www.youtube.com/embed/tgbNymZ7vqY"
-          />
-          <Flex flexDir="column" px="6" mt="2">
-            <ClassDescription 
-              duration={currentClass.duration} 
-              number={currentClass.number} 
-              title={currentClass.title}
-              titleSize="2xl"
+        p={["0","10"]}>
+
+        <TopNavigationBar
+          backUrl={"/dashboard" as any} 
+          title={course}
+        />
+
+        <Flex flexDir={["column","row"]}>
+
+          <Flex
+            flexDir="column"
+            w={["100%","60%"]}
+            h="100vh"
+            align="center"
+            // background="#000000"
+            pt={["0","2"]}
+            position={["unset","sticky"]}
+            top="-10"
+          >
+            <iframe 
+              className="class-video"
+              allowFullScreen
+              src={currentClass.url}
             />
-            <Text mt="6" fontSize="xl" lineHeight="1.4" color="brand.gray">
-              <div className="class-description" dangerouslySetInnerHTML={{__html:currentClass.description}}/>
-            </Text>
-          </Flex>
-        </Flex>
-        
-        <SimpleGrid
-          minChildWidth="400px"
-          spacingX="40px"
-          spacingY="40px"
-          mt="8"
-          // pr={["20","0"]}
-        >
-          { classes
-            .map((courseClass)=>{
-              return(
-                <ClassItem 
-                  key={courseClass.id} 
-                  id={courseClass.id}
-                  duration={courseClass.duration}
-                  number={courseClass.number}
-                  title={courseClass.title}
-                  slug={`/dashboard/${course}/${courseClass.id}`}
-                  isCurrent={courseClass.id === currentClass.id}
+            <Flex flexDir="column" px={["8","12"]} mt="2">
+              <ClassDescription 
+                duration={currentClass.duration} 
+                number={currentClass.number} 
+                title={currentClass.title}
+                titleSize="2xl"
+              />
+              <Text mt="6" fontSize="xl" lineHeight="1.4" color="brand.gray">
+                <div className="class-description" dangerouslySetInnerHTML={{__html:currentClass.description}}/>
+              </Text>
+              <Flex w="100%" justify="center" align="center" mt="8">
+                <NavigationButton
+                  isActive={!!currentClass?.previousClassId}
+                  urlToPushTo={previousClassUrl}
                 />
-              )
-            })
-          }
-        </SimpleGrid>
+                <NavigationButton
+                  isNext
+                  isActive={!!currentClass?.nextClassId}
+                  urlToPushTo={nextClassUrl}
+                />
+              </Flex>
+            </Flex>
+          </Flex>
+          
+          <SimpleGrid
+            minChildWidth={["100%","400px"]}
+            spacingX="40px"
+            spacingY="40px"
+            mt={["8","8"]}
+            p="4"
+            pl="6"
+            w={["100%","40%"]}
+          >
+            { classes
+              .map((courseClass)=>{
+                return(
+                  <ClassItem 
+                    key={courseClass.id} 
+                    id={courseClass.id}
+                    duration={courseClass.duration}
+                    number={courseClass.number}
+                    title={courseClass.title}
+                    slug={`/dashboard/${course}/${courseClass.id}`}
+                    isCurrent={courseClass.id === currentClass.id}
+                  />
+                )
+              })
+            }
+          </SimpleGrid>
+        </Flex>
       </Flex>
     </Box>
   )
@@ -111,6 +145,10 @@ export const getStaticProps: GetStaticProps = async({ params }) =>{
       { id: 2, title: 'Introdução à teoria matemática II', number: 2, duration: 6},
       { id: 3, title: 'Compreendendo números', number: 3, duration: 6},
       { id: 4, title: 'Compreendendo operações básicas', number: 4, duration: 8},
+      { id: 5, title: 'Introdução à teoria matemática', number: 1, duration: 5},
+      { id: 6, title: 'Introdução à teoria matemática II', number: 2, duration: 6},
+      { id: 7, title: 'Compreendendo números', number: 3, duration: 6},
+      { id: 8, title: 'Compreendendo operações básicas', number: 4, duration: 8},
     ]
       break;
     case 'phisics': classes = []
@@ -140,24 +178,24 @@ export const getStaticProps: GetStaticProps = async({ params }) =>{
   switch(Number(classId)){
     case 1: currentClass = {
       id: 1, 
-      title: 'Introdução à teoria matemática II', 
-      number: 1, 
-      duration: 5,
-      url: '',
-      description:"<p>Nesta aula será abordado os conceitos mais básicos da matemática.</p><p>Se trata de uma abordagem inicial, para criar uma base sólida na aprendizagem.</p>",
-      nextClassId: 2,
-      previousClassId: null
-    }
-      break;
-    case 2: currentClass = {
-      id: 1, 
       title: 'Introdução à teoria matemática', 
       number: 1, 
       duration: 5,
-      url: '',
+      url: 'https://youtube.com/embed/UwLFO1Di3Bg',
       description:"<p>Nesta aula será abordado os conceitos mais básicos da matemática.</p><p>Se trata de uma abordagem inicial, para criar uma base sólida na aprendizagem.</p>",
+      previousClassId: null,
+      nextClassId: 2,
+    }
+      break;
+    case 2: currentClass = {
+      id: 2, 
+      title: 'Introdução à teoria matemática II', 
+      number: 1, 
+      duration: 5,
+      url: 'https://youtube.com/embed/UwLFO1Di3Bg',
+      description:"<p>Nesta aula será abordado os conceitos mais básicos da matemática.</p><p>Se trata de uma abordagem inicial, para criar uma base sólida na aprendizagem.</p>",
+      previousClassId: 1,
       nextClassId: 3,
-      previousClassId: 1
     }
       break;
     case 2: currentClass = []

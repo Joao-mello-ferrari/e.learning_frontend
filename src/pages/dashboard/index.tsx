@@ -23,7 +23,7 @@ export default function Home({ courses }: HomeProps) {
   const [showFavoritedCourses, setShowFavoritedCourses] = useState(false);
 
   return (
-    <Box maxW="1440" m="0 auto" overflowX="hidden">
+    <Box maxW="1440" m="0 auto" /*overflowX="hidden"*/>
       <Header/>
       <Flex
         flexDir="column"

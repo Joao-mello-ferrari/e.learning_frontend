@@ -4,9 +4,10 @@ import { useState } from 'react'
 
 export default function Home() {
   return (
-    <Link href="/dashboard">
-      <a>dashboard</a>
-    </Link>
+      <Link href="/dashboard">
+        <a>dashboard</a>
+      </Link>
+    
   )
 }
 

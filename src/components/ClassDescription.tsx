@@ -13,7 +13,7 @@ export function ClassDescription({ title, number, duration, titleSize='xl' }: Cl
   return(
     <>
       <Text fontSize={titleSize} color="brand.dgray">{title}</Text>
-      <Flex mt="6">
+      <Flex mt="2">
         <Text fontSize="sm" color="brand.gray">Aula {String(number).padStart(2,'0')}</Text>
         <Flex align="center" justify="center" ml="4"> 
           <Icon 
