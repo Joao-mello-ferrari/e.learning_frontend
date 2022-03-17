@@ -61,7 +61,6 @@ export default function Course({ course, classes, currentClass }: CourseProps){
             w={["100%","60%"]}
             h="100vh"
             align="center"
-            // background="#000000"
             pt={["0","2"]}
             position={["unset","sticky"]}
             top="-10"

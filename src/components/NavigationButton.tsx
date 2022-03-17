@@ -1,7 +1,7 @@
 import { Button, Icon, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
-import { FiArrowLeft } from 'react-icons/fi'
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 
 interface NavigationButtonProps{
   isNext?: boolean;
@@ -32,14 +32,14 @@ export function NavigationButton({ isNext=false, isActive, urlToPushTo }:Navigat
         }}
         onClick={()=>{push(urlToPushTo)}}
       >
-        <Icon 
-          as={FiArrowLeft}
-          color="brand.white"
-          mr="2"
-        />
         <Text color="brand.white">
           Próxima aula
         </Text>
+        <Icon 
+          as={FiArrowRight}
+          color="brand.white"
+          ml="2"
+        />
       </Button>
     )
   }
