@@ -35,15 +35,6 @@ body::-webkit-scrollbar-thumb {
   position: absolute;
 }
 
-.custom-grid{
-  transition:  all 0.3s 
-}
-
-.custom-grid:hover{
-  cursor: pointer;
-  transform: scale(1.1);
-}
-
 .class-video{
   border-radius: 1rem;
   border: 4px solid #6548A3;
@@ -59,40 +50,6 @@ body::-webkit-scrollbar-thumb {
   .class-video{
     width: 100%!important;
   }
-}
-
-
-
-
-.wrap {
-  margin: 0 auto;
-  width: 90%;
-/* 
-  Be careful with height set on
-  the parent of a sticky element.
-  Uncomment to see issue.
-*/
-/*   height: 40%; */
-/* 
-  overflow cannot be used on
-  parents of position: sticky, 
-  uncomment to demonstrate the issue.
-*/
-/*   overflow: hidden; */
-/*   overflow-y: scroll; */
-}
-
-.aside {
-  background: #eee;
-  /* float: right; */
-  width: 20%;
-  padding: 1em;
-  /* position sticky */
-  position: sticky;
-  top: 3em;
-}
-.content {
-  width: 50%;
 }
 
 

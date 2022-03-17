@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from "next"
-import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 import { Header } from "../../../components/Header";
@@ -7,13 +7,11 @@ import { ClassItem } from '../../../components/ClassItem'
 import { ClassDescription } from "../../../components/ClassDescription";
 import { NavigationButton } from "../../../components/NavigationButton";
 import { TopNavigationBar } from "../../../components/TopNavigationBar";
-
-import { UrlObject } from 'url'
-
+import { useState } from "react";
 
 interface Class{
   id: number;
-  title: number;
+  title: string;
   number: number;
   duration: number;
 }
@@ -33,6 +31,8 @@ interface CourseProps{
 }    
 
 export default function Course({ course, classes, currentClass }: CourseProps){
+  const [inputValue, setInputValue] = useState('');
+  
   const { asPath } = useRouter();
 
   const previousClassUrl = asPath.replace(String(currentClass.id),String(currentClass?.previousClassId));
@@ -40,7 +40,7 @@ export default function Course({ course, classes, currentClass }: CourseProps){
   
   return (
     <Box maxW="1440" w="100vw" m="0 auto">
-      <Header/>
+      <Header catchInputValue={(e: React.ChangeEvent<HTMLInputElement>)=>{setInputValue(e.target.value)}}/>
 
       <Flex 
         flexDir="column" 
@@ -60,17 +60,19 @@ export default function Course({ course, classes, currentClass }: CourseProps){
             flexDir="column"
             w={["100%","60%"]}
             h="100vh"
-            align="center"
+            align="start"
             pt={["0","2"]}
             position={["unset","sticky"]}
             top="-10"
           >
-            <iframe 
-              className="class-video"
-              allowFullScreen
-              src={currentClass.url}
-            />
-            <Flex flexDir="column" px={["8","12"]} mt="2">
+            <Flex pl={["0","8"]} w="100%">
+              <iframe 
+                className="class-video"
+                allowFullScreen
+                src={currentClass.url}
+              />
+            </Flex>
+            <Flex flexDir="column" px={["8","12"]} mt="4">
               <ClassDescription 
                 duration={currentClass.duration} 
                 number={currentClass.number} 
@@ -94,16 +96,15 @@ export default function Course({ course, classes, currentClass }: CourseProps){
             </Flex>
           </Flex>
           
-          <SimpleGrid
-            minChildWidth={["100%","400px"]}
-            spacingX="40px"
-            spacingY="40px"
+          <VStack
+            spacing="16"
             mt={["8","8"]}
             p="4"
             pl="6"
             w={["100%","40%"]}
           >
             { classes
+              .filter(cClass=>cClass.title.toLowerCase().includes(inputValue.toLocaleLowerCase()))
               .map((courseClass)=>{
                 return(
                   <ClassItem 
@@ -118,7 +119,7 @@ export default function Course({ course, classes, currentClass }: CourseProps){
                 )
               })
             }
-          </SimpleGrid>
+          </VStack>
         </Flex>
       </Flex>
     </Box>

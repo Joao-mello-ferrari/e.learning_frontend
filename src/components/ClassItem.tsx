@@ -6,7 +6,7 @@ import { ClassDescription } from './ClassDescription'
  
 interface ClassItemProps{
   id: number;
-  title: number;
+  title: string;
   number: number;
   duration: number;
   slug: string;
@@ -20,12 +20,16 @@ export function ClassItem({ id, title, number, duration, slug, isCurrent }: Clas
   
   return(
     <GridItem 
-      className="custom-grid"
       display="flex" 
       alignItems="center"
       justifyContent="end"
       h="140px" 
       w={["100%","400px"]} 
+      transition= 'transform 0.3s' 
+      _hover={{
+        cursor: 'pointer',
+        transform: 'scale(1.1)'
+      }}
       onClick={()=>{push(slug)}}
     >
       <Flex 

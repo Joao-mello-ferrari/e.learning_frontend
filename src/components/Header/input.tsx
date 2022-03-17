@@ -1,7 +1,11 @@
 import { Flex, Icon, Input } from "@chakra-ui/react";
 import { FiSearch } from "react-icons/fi";
 
-export function SearchInput(){
+interface InputProps{
+  onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+export function SearchInput({ onInputChange }: InputProps){
   return(
     <Flex 
       as="label" 
@@ -18,7 +22,8 @@ export function SearchInput(){
         variant="unstyled"
         paddingLeft="4"
         color='brand.gray'
-        fontSize="lg"
+        fontSize="sm"
+        onChange={onInputChange}
       />
     </Flex>
   )  

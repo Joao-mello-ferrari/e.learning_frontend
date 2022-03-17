@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { FiPlayCircle, FiClock } from 'react-icons/fi'
 
 interface ClassDescriptionProps{
-  title: number;
+  title: string;
   number: number;
   duration: number;
   titleSize?: string;
