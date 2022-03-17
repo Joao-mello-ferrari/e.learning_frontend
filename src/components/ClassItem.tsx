@@ -2,15 +2,18 @@ import { Box, Flex, GridItem, Image, Text, Icon } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { FiPlayCircle, FiClock } from 'react-icons/fi'
 
+import { ClassDescription } from './ClassDescription'
+ 
 interface ClassItemProps{
   id: number;
   title: number;
   number: number;
   duration: number;
   slug: string;
+  isCurrent: boolean;
 }
 
-export function ClassItem({ id, title, number, duration, slug }: ClassItemProps){
+export function ClassItem({ id, title, number, duration, slug, isCurrent }: ClassItemProps){
   const isCompleted = id < 3
   
   const { push } = useRouter();
@@ -20,13 +23,13 @@ export function ClassItem({ id, title, number, duration, slug }: ClassItemProps)
       className="custom-grid"
       display="flex" 
       alignItems="center"
-      h="160px" 
-      w={["100%","440px"]} 
+      justifyContent="end"
+      h="140px" 
+      w={["100%","400px"]} 
       onClick={()=>{push(slug)}}
-      // pr={["2","0"]}
     >
       <Flex 
-        w={["20%","120px"]} 
+        w={["20%","100px"]} 
         h="60%"
         justify="center"
         align="center"
@@ -45,27 +48,15 @@ export function ClassItem({ id, title, number, duration, slug }: ClassItemProps)
       
       <Flex 
         flexDir="column" 
-        bg="brand.lgray"  
+        bg={isCurrent ? "brand.plight" : "brand.lgray"}  
         p="8" 
         pl={["10","14"]}
-        w={["70%","320px"]}
+        w={["80%","300px"]}
         h="100%"
         borderRadius="10" 
         position="relative"
       >
-        <Text fontSize="xl" color="brand.dgray">{title}</Text>
-        <Flex mt="6">
-          <Text fontSize="sm" color="brand.gray">Aula {String(number).padStart(2,'0')}</Text>
-          <Flex align="center" justify="center" ml="4"> 
-            <Icon 
-              as={FiClock}
-              w={4}
-              h={4}
-              color="brand.gray"
-            />
-            <Text fontSize="sm" color="brand.gray" ml="1">{duration} min</Text>
-          </Flex>
-        </Flex>
+        <ClassDescription duration={duration} number={number} title={title}/>
         
         {isCompleted && 
           <Box 

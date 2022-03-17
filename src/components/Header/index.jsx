@@ -17,7 +17,7 @@ export function Header(){
           <DrawerOverlay />
           <DrawerContent>
             {/* <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader> */}
-            <DrawerBody background="brand.primary" overflowX="hidden" pt="6">
+            <DrawerBody background="brand.primary" /*overflowX="hidden"*/ pt="6">
               <UserInfo />
               <Navbar/>
             </DrawerBody>

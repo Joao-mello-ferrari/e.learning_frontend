@@ -23,7 +23,7 @@ export default function Home({ courses }: HomeProps) {
   const [showFavoritedCourses, setShowFavoritedCourses] = useState(false);
 
   return (
-    <Box maxW="1440" m="0 auto" overflowX="hidden">
+    <Box maxW="1440" m="0 auto" /*overflowX="hidden"*/>
       <Header/>
       <Flex
         flexDir="column"
@@ -89,12 +89,12 @@ export default function Home({ courses }: HomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async() =>{
   const courses = [
-    { imgUrl:'/assets/Math.svg', alt:'math', course:'Matemática', classes:16, slug:'/math', isFavorited: true},
-    { imgUrl:'/assets/Física.svg', alt:'phisics', course:'Física', classes:20, slug:'/phisics', isFavorited: false},
-    { imgUrl:'/assets/English.svg', alt:'english', course:'Inglês', classes:44, slug:'/english', isFavorited: true},
-    { imgUrl:'/assets/Quimica.svg', alt:'chemistry', course:'Química', classes:20, slug:'/chemistry', isFaisFavoritedvorited: false},
-    { imgUrl:'/assets/Talk.svg', alt:'talk', course:'Diálogo em público', classes:18, slug:'/talk', isFavorited: false},
-    { imgUrl:'/assets/Build.svg', alt:'writing', course:'Redação', classes:54, slug:'writing', isFavorited: true}
+    { imgUrl:'/assets/Math.svg', alt:'math', course:'Matemática', classes:16, slug:'/math/1', isFavorited: true},
+    { imgUrl:'/assets/Física.svg', alt:'phisics', course:'Física', classes:20, slug:'/phisics/1', isFavorited: false},
+    { imgUrl:'/assets/English.svg', alt:'english', course:'Inglês', classes:44, slug:'/english/1', isFavorited: true},
+    { imgUrl:'/assets/Quimica.svg', alt:'chemistry', course:'Química', classes:20, slug:'/chemistry/1', isFaisFavoritedvorited: false},
+    { imgUrl:'/assets/Talk.svg', alt:'talk', course:'Diálogo em público', classes:18, slug:'/talk/1', isFavorited: false},
+    { imgUrl:'/assets/Build.svg', alt:'writing', course:'Redação', classes:54, slug:'writing/1', isFavorited: true}
   ]
 
   return{
