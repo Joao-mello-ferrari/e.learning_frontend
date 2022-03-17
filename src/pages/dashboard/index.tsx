@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { Box, Flex, Select, SimpleGrid, Text } from '@chakra-ui/react'
+import { Box, Button, Flex, Select, SimpleGrid, Text } from '@chakra-ui/react'
 import { Header } from '../../components/Header'
 
 import { CourseItem } from '../../components/CourseItem'
@@ -21,14 +21,15 @@ interface HomeProps{
 
 export default function Home({ courses }: HomeProps) {
   const [showFavoritedCourses, setShowFavoritedCourses] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <Box maxW="1440" m="0 auto" /*overflowX="hidden"*/>
-      <Header/>
+    <Box maxW="1440" m="0 auto" >
+      <Header catchInputValue={(e: React.ChangeEvent<HTMLInputElement>)=>{setInputValue(e.target.value)}}/>
       <Flex
         flexDir="column"
         background="brand.background"
-        // height="80vh"
         borderTopRadius="20"
         mt={"-3vh"}
         p="10"
@@ -45,7 +46,7 @@ export default function Home({ courses }: HomeProps) {
               cursor: 'pointer'
             }}
             focusBorderColor="brand.primary"
-            onChange={e=>setShowFavoritedCourses(e.target.value==='saved')}
+            onChange={e=>{setShowFavoritedCourses(e.target.value==='saved'); setIsEditing(false);}}
           >
             <option className="select-option" value='categories'>Categorias</option>
             <option className="select-option" value='saved'>Salvos</option>
@@ -53,9 +54,30 @@ export default function Home({ courses }: HomeProps) {
           <Text color="brand.gray" fontSize={["md","lg"]} ml="16" w="80px">
             { courses
               .filter(course=>showFavoritedCourses ? course.isFavorited : true)
+              .filter(course=>course.course.toLowerCase().includes(inputValue.toLowerCase()))
               .length 
             } cursos
           </Text>
+          { showFavoritedCourses &&
+            <Button 
+              color="brand.white" 
+              background="brand.plight" 
+              borderRadius="20" 
+              ml="auto"
+              w="15%" 
+              h="48px"
+              fontSize="sm"
+              transition="transform 0.3s"
+              _hover={{
+                background: 'brand.plight',
+                transform: 'scale(1.1)',
+              }}
+            onClick={()=>{setIsEditing(!isEditing)}}
+          >
+            { isEditing ? 'Parar edição' : 'Editar favoritos' } 
+          </Button>
+
+          }
         </Flex>
         
           
@@ -67,6 +89,7 @@ export default function Home({ courses }: HomeProps) {
         >
           { courses
             .filter(course=>showFavoritedCourses ? course.isFavorited : true)
+            .filter(course=>course.course.toLocaleLowerCase().includes(inputValue.toLocaleLowerCase()))
             .map((course,k)=>{
               return(
                 <CourseItem 
@@ -76,12 +99,13 @@ export default function Home({ courses }: HomeProps) {
                   course={course.course}
                   classes={course.classes} 
                   slug={course.slug}
+                  isEditing={isEditing}
                 />
               )
             })
           }
         </SimpleGrid>
-
+        
       </Flex>
     </Box>
   )
