@@ -217,6 +217,6 @@ export const getStaticProps: GetStaticProps = async({ params }) =>{
       currentClass,
       params
     },
-    // revalidate: 1
+    revalidate: 1
   }
 }
