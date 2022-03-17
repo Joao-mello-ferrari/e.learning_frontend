@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { GetStaticPaths, GetStaticProps } from "next"
 import { Box, Flex, Text, VStack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -7,7 +8,6 @@ import { ClassItem } from '../../../components/ClassItem'
 import { ClassDescription } from "../../../components/ClassDescription";
 import { NavigationButton } from "../../../components/NavigationButton";
 import { TopNavigationBar } from "../../../components/TopNavigationBar";
-import { useState } from "react";
 
 interface Class{
   id: number;
@@ -24,7 +24,7 @@ interface CurrentClass extends Class{
 }
 
 interface CourseProps{
-  course: string;
+  course: { id: number, name: string};
   classes: Class[];
   currentClass: CurrentClass;
   params: object;
@@ -51,7 +51,8 @@ export default function Course({ course, classes, currentClass }: CourseProps){
 
         <TopNavigationBar
           backUrl={"/dashboard" as any} 
-          title={course}
+          title={course.name}
+          courseId={course.id}
         />
 
         <Flex flexDir={["column","row"]}>
@@ -63,7 +64,7 @@ export default function Course({ course, classes, currentClass }: CourseProps){
             align="start"
             pt={["0","2"]}
             position={["unset","sticky"]}
-            top="-10"
+            top="-32"
           >
             <Flex pl={["0","8"]} w="100%">
               <iframe 
@@ -211,9 +212,26 @@ export const getStaticProps: GetStaticProps = async({ params }) =>{
     default: break;
   }
 
+  let completeCourse = null;
+  switch(course){
+    case 'math':
+      completeCourse = { id:1, name:'Matemática'};
+      break;
+    
+    case 'phisics':
+      completeCourse = { id:2, name:'Física'};
+      break;
+  }
+    
+    // { id:3, imgUrl:'/assets/English.svg', alt:'english', course:'Inglês', classes:44, slug:'/english/1'},
+    // { id:4, imgUrl:'/assets/Quimica.svg', alt:'chemistry', course:'Química', classes:20, slug:'/chemistry/1'},
+    // { id:5, imgUrl:'/assets/Talk.svg', alt:'talk', course:'Diálogo em público', classes:18, slug:'/talk/1'},
+    // { id:6, imgUrl:'/assets/Build.svg', alt:'writing', course:'Redação', classes:54, slug:'writing/1'}
+  
+
   return{
     props:{
-      course,
+      course:completeCourse,
       classes,
       currentClass,
       params

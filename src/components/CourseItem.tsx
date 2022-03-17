@@ -1,9 +1,12 @@
 import { Box, GridItem, Image, Text, Icon } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
+import { useFavorites } from '../context/favoritedCourses';
+
 import { FiTrash } from 'react-icons/fi'
 
 interface CustomGriditemProps{
+  id: number,
   imgUrl: string;
   alt: string;
   course: string;
@@ -12,9 +15,11 @@ interface CustomGriditemProps{
   isEditing?: boolean
 }
 
-export function CourseItem({ imgUrl, alt, course, classes, slug, isEditing }: CustomGriditemProps){
+export function CourseItem({ id, imgUrl, alt, course, classes, slug, isEditing }: CustomGriditemProps){
   const { push } = useRouter();
   
+  const { removeCourse } = useFavorites();
+
   return(
     <GridItem 
       bg="brand.lgray" 
@@ -32,20 +37,20 @@ export function CourseItem({ imgUrl, alt, course, classes, slug, isEditing }: Cu
       onClick={()=>{ if(!isEditing) push(`/dashboard/${slug}`) }}
     >
       <Image src={imgUrl} alt={alt} h={[20]}/>
-      <Text color="brand.dgray" mt="4">{course}</Text>
-      <Text color="brand.gray" fontSize="sm">{classes} aulas</Text>
+      <Text color="brand.dgray" fontSize={["lg","md"]} mt="4">{course}</Text>
+      <Text color="brand.gray" fontSize={["md","sm"]}>{classes} aulas</Text>
 
       { isEditing &&
         <Icon 
           as={FiTrash} 
           position="absolute" 
-          top="4" 
-          right="4"
+          top={["5","4"]} 
+          right={["5","4"]} 
           color="brand.gray"
-          onClick={()=>{
-            
-          }}
-      />
+          h={[7,5]}
+          w={[7,5]}
+          onClick={()=>{ removeCourse(id) }}
+        />
       }
       
     </GridItem>

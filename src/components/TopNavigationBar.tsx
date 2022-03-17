@@ -1,15 +1,20 @@
-import { Flex, Text, Button, Icon, useDisclosure, useMediaQuery } from '@chakra-ui/react'
-import { Drawer, DrawerOverlay, DrawerContent, DrawerBody } from '@chakra-ui/react'
-import { FiArrowLeft } from 'react-icons/fi'
+import { Flex, Text, Icon } from '@chakra-ui/react'
 import { UrlObject } from 'url'
 import Link from 'next/link'
+
+import { useFavorites } from '../context/favoritedCourses'
+
+import { FiArrowLeft } from 'react-icons/fi'
+import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io'
 
 interface TopNavigationBarProps{
   backUrl: UrlObject;
   title: String;
+  courseId: number;
 }
 
-export function TopNavigationBar({ backUrl, title }:TopNavigationBarProps){
+export function TopNavigationBar({ backUrl, title, courseId }:TopNavigationBarProps){
+  const { favoriteCourses, addCourse, removeCourse } = useFavorites();
 
   return(
     <Flex w="100%" 
@@ -34,9 +39,34 @@ export function TopNavigationBar({ backUrl, title }:TopNavigationBarProps){
           />
         </Link>
           
-        <Text color={["brand.white","brand.dgray"]} fontWeight="bold" fontSize="2xl">
+        <Text color={["brand.white","brand.dgray"]} fontWeight="bold" fontSize="2xl" mr={["auto","0"]}>
           {title}
         </Text>
+
+        { favoriteCourses.indexOf(courseId) !== -1
+          ? <Icon 
+              as={IoIosHeart}
+              color="brand.secondary"
+              h={[8,10]}
+              w={[8,10]}
+              ml="8"
+              _hover={{
+                cursor: 'pointer'
+              }}
+              onClick={()=>{ removeCourse(courseId); }}
+            />
+          : <Icon 
+              as={IoIosHeartEmpty}
+              color="brand.secondary"
+              h={[8,10]}
+              w={[8,10]}
+              ml="8"
+              _hover={{
+                cursor: 'pointer'
+              }}
+              onClick={()=>{ addCourse(courseId); }}
+            />
+        }
         
       </Flex>
   )
