@@ -1,18 +1,14 @@
-import { Box, Flex } from '@chakra-ui/react'
-import { Header } from '../components/Header'
+import Link from 'next/link';
+import { useState } from 'react'
+
 
 export default function Home() {
+  const [showFavoritedCourses, setShowFavoritedCourses] = useState(false);
+
   return (
-    <Box maxW="1440" m="0 auto" overflowX="hidden">
-      <Header/>
-      {/* <Flex
-        background="brand.background"
-        height="80vh"
-        borderTopRadius="20"
-        mt="-3vh"
-      >
-        
-      </Flex> */}
-    </Box>
+    <Link href="/dashboard">
+      <a>dashboard</a>
+    </Link>
   )
 }
+

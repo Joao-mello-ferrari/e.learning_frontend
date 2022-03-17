@@ -12,11 +12,7 @@ export function Header(){
   
   if(isMobile){
     return (
-      <Flex w="100vw" maxW="1440" h="10vh" background="brand.primary" align="center" px="8" justify="space-between">
-        <Icon as={FiMenu} w={8} h={8} onClick={onOpen} color="brand.white"/>
-        <Text color="brand.white" fontWeight="bold" fontSize="3xl">
-          e<Text as="span" color="brand.secondary" mx="0.8">.</Text>learning
-        </Text>
+      <Flex w="100vw" maxW="1440" h="14vh" background="brand.primary" align="center" px="8" pb="4" justify="space-between">
         <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay />
           <DrawerContent>
@@ -27,12 +23,16 @@ export function Header(){
             </DrawerBody>
           </DrawerContent>
         </Drawer>
+        <Icon as={FiMenu} w={8} h={8} onClick={onOpen} color="brand.white"/>
+        <Text color="brand.white" fontWeight="bold" fontSize="3xl">
+          e<Text as="span" color="brand.secondary" mx="0.8">.</Text>learning
+        </Text>
       </Flex>
     )
   }
 
   return(
-    <Flex w="100vw" maxW="1440" h="20vh" background="brand.primary" align="center" px="8" >
+    <Flex w="100vw" maxW="1440" h="20vh" background="brand.primary" align="center" px="8" pb="4">
         
         <Text color="brand.white" fontWeight="bold" fontSize="2xl">
           e<Text as="span" color="brand.secondary" mx="0.8">.</Text>learning

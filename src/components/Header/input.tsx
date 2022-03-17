@@ -11,6 +11,7 @@ export function SearchInput(){
       px="5"
       py="3"
       alignItems="center"
+      mr="4"
     >
       <Icon as={FiSearch} w={5} h={5} color="brand.gray"/>
       <Input
