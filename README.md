@@ -3,9 +3,9 @@ In order to practice and stablish a solid connection with the next.js way of cod
 Still, education is such an amazing area, and creating online tools so people can study in a better way is always nice.
 You can check it out over this link -> *not available yet*
 
-# Check the project for yuorself!
+# Check the project for yourself!
 **Youtube video** > https://youtu.be/r5QflN4EOTM
-
+![elearning home screen. Header on top, with user info and navigation, and courses cards, in the middle/bottom screen](https://user-images.githubusercontent.com/67838782/159188827-8ec27cce-f638-4be0-bf07-71949ff7ec85.png "e.learning preview") 
 # How can i download and run the project?
 With simples steps, it will be able to run everything locally.
 <ul>
