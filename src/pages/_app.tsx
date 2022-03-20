@@ -4,6 +4,8 @@ import Head from 'next/head'
 import { ChakraProvider } from '@chakra-ui/react'
 import { customTheme } from '../styles/theme'
 
+import { FavoritedCoursesProvider } from '../context/favoritedCourses'
+
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }:AppProps) {
@@ -13,9 +15,11 @@ function MyApp({ Component, pageProps }:AppProps) {
         <title>e.learning</title>
       </Head>
 
-      <ChakraProvider theme={customTheme}>
-        <Component {...pageProps} />
-      </ChakraProvider>
+      <FavoritedCoursesProvider>
+        <ChakraProvider theme={customTheme}>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </FavoritedCoursesProvider>
     </>
   )
 }

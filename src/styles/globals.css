@@ -29,7 +29,6 @@ body::-webkit-scrollbar-track {
  
 body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
-  /* outline: 1px solid slategrey; */
   opacity: 0.1;
   border-radius: 0.2rem;
   position: absolute;
@@ -49,6 +48,7 @@ body::-webkit-scrollbar-thumb {
 @media(max-width: 768px){
   .class-video{
     width: 100%!important;
+    border: 0;
   }
 }
 
