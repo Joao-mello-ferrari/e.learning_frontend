@@ -8,6 +8,7 @@ import { ClassItem } from '../../../components/ClassItem'
 import { ClassDescription } from "../../../components/ClassDescription";
 import { NavigationButton } from "../../../components/NavigationButton";
 import { TopNavigationBar } from "../../../components/TopNavigationBar";
+import { getClassesFromCourse, getCompleteClass } from "../../../helpers/mockedData";
 
 interface Class{
   id: number;
@@ -24,7 +25,7 @@ interface CurrentClass extends Class{
 }
 
 interface CourseProps{
-  course: { id: number, name: string};
+  course: { id: number, name: string, slug: string};
   classes: Class[];
   currentClass: CurrentClass;
   params: object;
@@ -114,7 +115,7 @@ export default function Course({ course, classes, currentClass }: CourseProps){
                     duration={courseClass.duration}
                     number={courseClass.number}
                     title={courseClass.title}
-                    slug={`/dashboard/${course}/${courseClass.id}`}
+                    slug={`/dashboard/${course.slug}/${courseClass.id}`}
                     isCurrent={courseClass.id === currentClass.id}
                   />
                 )
@@ -137,97 +138,26 @@ export const getStaticPaths: GetStaticPaths = () =>{
 export const getStaticProps: GetStaticProps = async({ params }) =>{
   let { course, classId } = params;
 
-  // fetch course (params.slug) data from whereever
-  let classes = null;
+  const [classes, completeCourse] = getClassesFromCourse(course);
+  const [currentClass, redirectClassId] = getCompleteClass(course, Number(classId));
 
-  switch(course){
-    case 'math': classes = [
-      { id: 1, title: 'Introdução à teoria matemática', number: 1, duration: 5},
-      { id: 2, title: 'Introdução à teoria matemática II', number: 2, duration: 6},
-      { id: 3, title: 'Compreendendo números', number: 3, duration: 6},
-      { id: 4, title: 'Compreendendo operações básicas', number: 4, duration: 8},
-      { id: 5, title: 'Introdução à teoria matemática', number: 1, duration: 5},
-      { id: 6, title: 'Introdução à teoria matemática II', number: 2, duration: 6},
-      { id: 7, title: 'Compreendendo números', number: 3, duration: 6},
-      { id: 8, title: 'Compreendendo operações básicas', number: 4, duration: 8},
-    ]
-      break;
-    case 'phisics': classes = []
-      break;
-    case 'english': classes = []
-      break;
-    case 'chemistry': classes = []
-      break;
-    case 'talk': classes = []
-      break;
-    case 'writing': classes = []
-      break;
-    default: break;
-  }
-
-  if(!classes){
+  if(!classes || !completeCourse || !currentClass){
     return{
       redirect:{
-        destination: '/',
+        destination: '/dashboard',
         permanent: false
       }
     }
   }
 
-  let currentClass = null;
-
-  switch(Number(classId)){
-    case 1: currentClass = {
-      id: 1, 
-      title: 'Introdução à teoria matemática', 
-      number: 1, 
-      duration: 5,
-      url: 'https://youtube.com/embed/UwLFO1Di3Bg',
-      description:"<p>Nesta aula será abordado os conceitos mais básicos da matemática.</p><p>Se trata de uma abordagem inicial, para criar uma base sólida na aprendizagem.</p>",
-      previousClassId: null,
-      nextClassId: 2,
+  if(!!redirectClassId){
+    return{
+      redirect:{
+        destination: `/dashboard/${course}/${redirectClassId}`,
+        permanent: false
+      }
     }
-      break;
-    case 2: currentClass = {
-      id: 2, 
-      title: 'Introdução à teoria matemática II', 
-      number: 1, 
-      duration: 5,
-      url: 'https://youtube.com/embed/UwLFO1Di3Bg',
-      description:"<p>Nesta aula será abordado os conceitos mais básicos da matemática.</p><p>Se trata de uma abordagem inicial, para criar uma base sólida na aprendizagem.</p>",
-      previousClassId: 1,
-      nextClassId: 3,
-    }
-      break;
-    case 2: currentClass = []
-      break;
-    case 3: currentClass = []
-      break;
-    case 4: currentClass = []
-      break;
-    case 5: currentClass = []
-      break;
-    case 6: currentClass = []
-      break;
-    default: break;
   }
-
-  let completeCourse = null;
-  switch(course){
-    case 'math':
-      completeCourse = { id:1, name:'Matemática'};
-      break;
-    
-    case 'phisics':
-      completeCourse = { id:2, name:'Física'};
-      break;
-  }
-    
-    // { id:3, imgUrl:'/assets/English.svg', alt:'english', course:'Inglês', classes:44, slug:'/english/1'},
-    // { id:4, imgUrl:'/assets/Quimica.svg', alt:'chemistry', course:'Química', classes:20, slug:'/chemistry/1'},
-    // { id:5, imgUrl:'/assets/Talk.svg', alt:'talk', course:'Diálogo em público', classes:18, slug:'/talk/1'},
-    // { id:6, imgUrl:'/assets/Build.svg', alt:'writing', course:'Redação', classes:54, slug:'writing/1'}
-  
 
   return{
     props:{

@@ -121,12 +121,12 @@ export default function Home({ courses }: HomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async() =>{
   const courses = [
-    { id:1, imgUrl:'/assets/Math.svg', alt:'math', course:'Matemática', classes:16, slug:'/math/1'},
-    { id:2, imgUrl:'/assets/Física.svg', alt:'phisics', course:'Física', classes:20, slug:'/phisics/1'},
-    { id:3, imgUrl:'/assets/English.svg', alt:'english', course:'Inglês', classes:44, slug:'/english/1'},
-    { id:4, imgUrl:'/assets/Quimica.svg', alt:'chemistry', course:'Química', classes:20, slug:'/chemistry/1'},
-    { id:5, imgUrl:'/assets/Talk.svg', alt:'talk', course:'Diálogo em público', classes:18, slug:'/talk/1'},
-    { id:6, imgUrl:'/assets/Build.svg', alt:'writing', course:'Redação', classes:54, slug:'writing/1'}
+    { id:1, imgUrl:'/assets/Math.svg', alt:'math', course:'Matemática', classes:4, slug:'/math/1'},
+    { id:2, imgUrl:'/assets/Física.svg', alt:'phisics', course:'Física', classes:5, slug:'/phisics/1'},
+    { id:3, imgUrl:'/assets/English.svg', alt:'english', course:'Inglês', classes:3, slug:'/english/1'},
+    { id:4, imgUrl:'/assets/Quimica.svg', alt:'chemistry', course:'Química', classes:4, slug:'/chemistry/1'},
+    { id:5, imgUrl:'/assets/Talk.svg', alt:'talk', course:'Diálogo em público', classes:4, slug:'/talk/1'},
+    { id:6, imgUrl:'/assets/Build.svg', alt:'writing', course:'Redação', classes:2, slug:'writing/1'}
   ]
 
   return{
