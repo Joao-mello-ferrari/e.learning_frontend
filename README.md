@@ -3,6 +3,9 @@ In order to practice and stablish a solid connection with the next.js way of cod
 Still, education is such an amazing area, and creating online tools so people can study in a better way is always nice.
 You can check it out over this link -> *not available yet*
 
+# Check the project for yuorself!
+**Youtube video** > https://youtu.be/r5QflN4EOTM
+
 # How can i download and run the project?
 With simples steps, it will be able to run everything locally.
 <ul>
