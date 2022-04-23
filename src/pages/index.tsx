@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <Flex h="100vh" w="100vw" background="brand.primary">
       <Head>
-        <title>e.elearning</title>
+        <title>e.learning</title>
       </Head>
 
       <Flex flexDir="column" w="50%" justify="center" align="start" pl="16vw">
