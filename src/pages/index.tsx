@@ -1,7 +1,7 @@
 import { Flex, Box, Text, Button, Image, useMediaQuery } from '@chakra-ui/react'
 
 import { useRouter } from 'next/router';
-
+import Head from 'next/head'  
 
 export default function Home() {
   const [isMobile] = useMediaQuery('(max-width: 768px)');
@@ -69,6 +69,10 @@ export default function Home() {
   }
   return (
     <Flex h="100vh" w="100vw" background="brand.primary">
+      <Head>
+        <title>e.elearning</title>
+      </Head>
+
       <Flex flexDir="column" w="50%" justify="center" align="start" pl="16vw">
         <Text color="brand.secondary" fontSize="6xl" lineHeight="1.2">
           Aprenda da melhor forma
